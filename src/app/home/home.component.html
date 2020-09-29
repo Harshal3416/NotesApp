@@ -1,0 +1,73 @@
+<div class="m-3">
+    <div class="container d-sm-flex flex-column-sm align-items-center">
+       
+            <div class="card w-100 sideMenu mainCards mr-2" *ngIf="toggle">
+                <div class="card-header lead p-3">Notes List</div>
+                <div class="card-body list">
+
+                    <div *ngIf="!filteredList">
+                        <div class="card bg-light mb-2 p-2 note" (click)="viewNote(item)" *ngFor="let item of notesList">
+                            <div class="h5 card-title lead">{{ item.title | titlecase }}</div>
+                            <div class="card-text">{{ item.description }}</div>                                
+                            <small class="text-muted">{{ item.time | date:'medium' }}</small>
+                        </div>
+                    </div>
+
+                    <div *ngIf="filteredList">
+                        <div class="card bg-light mb-2 p-2 note" (click)="viewNote(item)" *ngFor="let item of filteredList">
+                            <div class="h5 card-title lead">{{ item.title | titlecase }}</div>
+                            <div class="card-text">{{ item.description }}</div>                                
+                            <small class="text-muted">{{ item.time | date:'medium' }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card w-100 maninMenu mainCards">
+                <div class="card-header">
+                    <nav class="navbar m-0 p-0">
+                        <button class="btn btn-outline-dark mb-2" type="button" (click)="toggle = !toggle">
+                            <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                        </button>                        
+
+                        <form class="form-group">
+                            <div class="input-group">
+                                <input type="text" 
+                                class="form-control" 
+                                placeholder="Search..." 
+                                name="search" 
+                                [(ngModel)]="searchNoteValue"
+                                (keyup)="searchNote()"
+                                autocomplete="off"
+                                >
+                            </div>
+                        </form>                            
+                    </nav>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="saveNote()" #f="ngForm">
+                        <div class="text-muted text-center mb-2">{{ time | date:'medium'}}</div>
+
+                        <div class="d-flex align-items-center">
+                            <div class="btn-group d-flex flex-row m-auto justify-content-center-md">                    
+                                <button class="btn btn-outline-dark" type="button" [disabled]="!presentNote" (click)="deleteNote()">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                                    
+                                <button class="btn btn-outline-dark" type="submit" [disabled]="!f.valid">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+
+                                <button class="btn btn-outline-dark" type="button" (click)="clearData()">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>                        
+
+                        <hr>
+                        <textarea required ngModel class="title" name="title" placeholder="*Note Title" cols="10" rows="2"></textarea><hr>
+                        <textarea required ngModel class="desc" name="description" placeholder="*Note Description" cols="20" rows="7"></textarea>    
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>

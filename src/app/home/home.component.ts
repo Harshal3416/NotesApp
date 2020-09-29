@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   title: string;
   description: string;
   notesData;
-  notesList: any;
+  notesList: any = undefined;
   presentNote: any = undefined;
   searchNoteValue: string;
   disableSave: boolean;

@@ -5,7 +5,9 @@
                 <div class="card-header lead p-3">Notes List</div>
                 <div class="card-body list">
 
-                    <p *ngIf="!notesList.length" class="alert alert-danger">Notes list empty</p>
+                    <p *ngIf="!notesList.length" class="alert alert-danger">
+                        No Notes Available
+                    </p>
 
                     <div *ngIf="!filteredList">
                         <div class="card bg-light mb-2 p-2 note" (click)="viewNote(item)" *ngFor="let item of notesList">
